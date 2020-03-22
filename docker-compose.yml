@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  springboot-image-rendering:
+    image: springboot-people-service:1
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - /data/springboot-people-service
+    ports:
+      - 8085:8085
