@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  springboot-image-rendering:
+  springboot-people-service:
     image: springboot-people-service:1
     build:
       context: ./

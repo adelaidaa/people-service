@@ -2,7 +2,6 @@ package com.adelaida.people.adapters.rest;
 
 import com.adelaida.people.core.ports.PeopleService;
 import com.adelaida.people.core.ports.PersonDto;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,15 +13,11 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.Set;
-import java.util.UUID;
 
-import static org.hamcrest.Matchers.equalTo;
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -43,9 +38,9 @@ class PeopleControllerTest {
             PersonDto personDto2 = new PersonDto("first name 2", lastName);
             given(peopleService.getPeopleByLastName(lastName)).willReturn(Set.of(personDto1, personDto2));
 
-            //Given When Then
             mockMvc.perform(MockMvcRequestBuilders.get("/people/" + lastName)
-                    .contentType(MediaType.APPLICATION_JSON))
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content("{\"firstName\":\"first name 1\",\"lastName\":\"lastName\"},{\"firstName\":\"first name 2\",\"lastName\":\"lastName\"}"))
                     .andExpect(status().isOk());
         }
     }

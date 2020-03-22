@@ -12,7 +12,7 @@ public class PeopleService implements PeopleServiceI {
     @Autowired
     private PersonRepository repository;
     @Autowired
-    private PersonConverter converter;
+    private PersonEntityConverter converter;
 
     @Override
     public Set<PersonDto> getPeopleByLastName(String lastName) {

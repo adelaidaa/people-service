@@ -5,7 +5,7 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
-class PersonConverter implements Converter<PersonEntity, PersonDto> {
+class PersonEntityConverter implements Converter<PersonEntity, PersonDto> {
     @Override
     public PersonDto convert(PersonEntity personEntity) {
         return new PersonDto(personEntity.getFirstName(), personEntity.getLastName());
